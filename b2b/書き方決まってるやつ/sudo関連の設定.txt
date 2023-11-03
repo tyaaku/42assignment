@@ -1,0 +1,42 @@
+
+
+	/etc/sudoers.d/sudo_config
+
+Defaults	env_reset
+Defaults	mail_badpass
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin"
+Defaults	badpass_message="Password is wrong, please try again!"
+Defaults	passwd_tries=3
+Defaults	logfile="/var/log/sudo.log"
+Defaults	log_input, log_output
+Defaults	requiretty
+
+
+このテキストは、Linuxシステムで使用されるsudo（スーパーユーザーとしてコマンドを実行するためのユーティリティ）の設定ファイル
+（通常は/etc/sudoers）の内容を示しています。それぞれの行は、sudoのデフォルトの設定値を変更するための指示を提供しています。
+以下に各行の意味を説明します：
+
+Defaults env_reset: 
+この行は、sudoコマンドを実行する際に環境変数をリセットするように指定しています。これにより、実行環境をシンプルにし、セキュリティ上のリスクを軽減します。
+
+Defaults mail_badpass: 
+ユーザーが誤ったパスワードを入力した場合に、メールで通知を送信するように指定しています。
+
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin": 
+sudoコマンドを実行する際の実行ファイルの検索パスを指定しています。
+これにより、セキュリティ上の理由から、特定のディレクトリの外部から実行ファイルを読み込むことを防ぎます。
+
+Defaults badpass_message="Password is wrong, please try again!": 
+ユーザーが誤ったパスワードを入力した場合に表示されるカスタムメッセージを指定しています。
+
+Defaults passwd_tries=3: 
+パスワードを入力する試行回数を3回に制限しています。3回以上誤ったパスワードを入力すると、アカウントがロックアウトされる可能性があります。
+
+Defaults logfile="/var/log/sudo.log":
+sudoコマンドの実行ログを/var/log/sudo.logファイルに保存するように指定しています。
+
+Defaults log_input, log_output: 
+sudoコマンドの標準入力と標準出力もログに記録するように指定しています。
+
+Defaults requiretty: 
+sudoコマンドを実行する際に、tty（端末）が必要であることを指定しています。これにより、リモートからのsudo実行を制限することができます。

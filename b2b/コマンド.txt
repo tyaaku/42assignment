@@ -1,0 +1,96 @@
+-----------基本操作---------------------
+
+shasum <自分のファイル名>.vdi
+	virtual box の識別番号の確認。提出ファイル<signiture.txt>の中身はこれのコピペでいい。virtual boxを起動する度に？変わっちゃうから、提出してから変更が加えられてないことを証明するために使う。実験とかレビューはクローンしたやつでやらないとずれる。
+
+
+
+sudo reboot
+	rebootする
+
+------ソフトウェア系--------
+sudo apt install (sudo, usw, ssh, vim等)
+	インストール系はこれでやる。前３つは必須。
+
+systemctl status (ssh, ufw, )
+	sshやufwが適用されているかを確認できる。
+
+dpkg -l | grep (sudo, ssh, ufw)
+	インストールできているかを確かめる。最初にiiがついているならおk
+
+lsblk
+	パーテーションの構造がわかる
+
+uname -a または cat /etc/os-release
+	Deibian か Rocky が入っているかのチェック
+
+----ユーザー・グループ関連--------
+
+sudo chage -l <ユーザー名>
+	パスワードポリシーがそのユーザーに適応されているかの確認
+
+sudo adduser <ユーザー名>
+	新しいユーザーの作成
+
+sudo addgroup <グループ名>
+	新しいグループの作成
+
+sudo adduser <ユーザー名> <グループ名> または sudo usermod -aG <グループ名> <ユーザー名>
+	ユーザーをグループに追加
+
+cut -d: -f1 /etc/passwd
+	全てのユーザーを表示
+
+getent group 
+	グループの指定なし->つまり全グループがわかる
+
+getent group <グループ名>
+	これでグループの参加者を確認できる。
+
+sudo groupdel <グループ名>
+	グループの削除
+
+sudo userdel -r <ユーザー名>
+	ユーザーの削除、-rでそいつのホームディレクトリとかも消してくれる。
+
+hostname または uname -n
+	ホスト名の表示
+
+sudo hostnamectl set-hostname <名前>
+	ホストの名前を変更。reboot後に適用される。ホスト名は<intra名+42(例：taokada42)>になってる必要がある。
+
+--------UFW関連----------------
+
+sudo ufw status
+	ufwで許可されているポートを確認する。
+
+sudo ufw allow ssh
+	ufwにおいてsshの許可をする
+
+sudo ufw allow 8080
+	8080を追加で許可する。
+
+sudo ufw delete allow 8080
+	8080を許可しない様にする。
+
+--------SSH関連----------------
+
+sudo vim /etc/ssh/sshd_config
+	ここでポート設定をいじる。SSHを使うためのポートの指定
+
+ssh <ユーザー名>＠userlocal -p 4242
+	自分のIPアドレスのとこのユーザー名のアカウントにポート４２４２を使って接続する。
+
+rm ~/.ssh/known_hosts
+	iTermでこれを打つと既存のポートを忘れて、同じポート番号を指すやつに新しくつけ直してくれる。
+
+--------CRON関連----------------
+
+sudo crontab -u root -e
+	クロンの設定を変えるためのコマンド
+
+sudo systemctl disable cron
+	クロンを無効にする
+
+sudo systemctl enable cron
+	クロンを有効にする

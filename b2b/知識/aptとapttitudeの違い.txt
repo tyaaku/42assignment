@@ -1,0 +1,12 @@
+
+どれもDeibian系のパッケージ管理システム
+代表的なLinuxOSとしてCentOS（RedHat系）とUbuntu(Debian系)がある。
+２つともパッケージ管理の方法が違い、CentOSはrpm形式、Ubuntuはdeb形式。
+後者のものが、aptシリーズ
+「apt-get」はaptの前身。設計上のミスがあり、後継のaptになった。
+「apt」はapt-getの設計上のミスを修正したもの、アップグレードのパッケージ選択規則はゆるい
+「aptitude」は派生APTとして誕生し、同様に選択規則はゆるい。
+
+Debianではaptが推奨されている、
+というのも、aptitudeはまだまだ未完成の状態。
+aptitudeはグラフィカルインターフェースを使えるようになる。
